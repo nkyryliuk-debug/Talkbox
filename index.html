@@ -827,20 +827,6 @@ function cleanupPeer(peerId) {
 // breites weißes/rosa Rauschen durch engen Bandpass (300-3000 Hz)
 // + kurze Crackle-Impulse wie bei echtem Funk
 
-function getAudioCtx() {
-  if (audioCtx) return audioCtx;
-  return new (window.AudioContext || window.webkitAudioContext)();
-}
-
-function playSquelch(type, volume = 1.0) {
-  try {
-    const ctx = getAudioCtx();
-    if (ctx.state === 'suspended') ctx.resume();
-    if (type === 'open') squelchOpen(ctx, volume);
-    else squelchClose(ctx, volume);
-  } catch(e) {}
-}
-
 // Erzeugt einen Buffer mit "gefärbtem" Rauschen (mehr Mitten, weniger Bass/Höhen)
 // — so klingt echter Funk-Squelch
 function makeRadioNoise(ctx, duration) {
